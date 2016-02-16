@@ -1,0 +1,98 @@
+<ion-view view-title="Account">
+  <ion-content>
+    <ion-list>
+    <ion-toggle  ng-model="settings.enableBluetooth" ng-change="bluetoothStatusChange()">
+        비콘 탐색기
+    </ion-toggle>
+    <table>
+      <tr>
+          <th>platform</th>
+          <td>{{devicesInfomation.platform}}</td>
+      </tr>
+      <tr>
+          <th>version</th>
+          <td>{{devicesInfomation.version}}</td>
+      </tr>
+      <tr>
+          <th>model</th>
+          <td>{{devicesInfomation.model}}</td>
+      </tr>
+      <tr>
+          <th>Screen width</th>
+          <td>{{devicesInfomation.width}}</td>
+      </tr>
+      <tr>
+          <th>Screen height</th>
+          <td>{{devicesInfomation.height}}</td>
+      </tr>
+    </table>
+   <div>
+     <p>비콘 로그</p>
+     <p>에러 : {{beaconsMsg.error}}</p>
+     <p>업데이트 타임 : {{beaconsMsg.upTime}}</p>
+     <p>찾은 갯수 : {{beaconsMsg.bcn_cnt}}</p>
+     <p>활성화 장치 : {{beaconsMsg.bcn_no}}</p>
+   </div>
+    <div>
+
+      <div class="list">
+          <div class="item" ng-repeat="(key, value) in beacons" >
+              <div class="row">
+                  <div class="col truncate">
+                      {{value.uuid}}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      major: {{value.major}}
+                  </div>
+                  <div class="col">
+                      minor: {{value.minor}}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                    proximity :  {{value.proximity}}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                    rssi :  {{value.rssi}}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                    tx :  {{value.tx}}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                    accuracy :  {{value.accuracy}}
+                  </div>
+
+                  <p  ng-if="value.accuracy >= 4.5" style="background:red;"> VERY FAR</p>
+                  <p  ng-if="value.accuracy >= 1.5 && value.accuracy < 4.5"  style="background:orange;"> FAR</p>
+                  <p  ng-if="value.accuracy >= 0.99 && value.accuracy < 1.5"  style="background:yellow;"> CLOSE</p>
+                  <p  ng-if="value.accuracy < 0.99"  style="background:green;"> Very CLOSE </p>
+
+<!--
+            <p  ng-if="value.accuracy - (value.rssi/value.tx)  >= 0.8" style="background:red;"> VERY FAR</p>
+            <p  ng-if="value.accuracy - (value.rssi/value.tx) >= 0.6 && value.accuracy - (value.rssi/value.tx)  < 0.8"  style="background:orange;"> FAR</p>
+            <p  ng-if="value.accuracy - (value.rssi/value.tx)  >= 0.4 && value.accuracy - (value.rssi/value.tx)  < 0.6"  style="background:yellow;"> CLOSE</p>
+            <p  ng-if="value.accuracy - (value.rssi/value.tx) < 0.4"  style="background:green;"> Very CLOSE </p>
+-->
+
+              </div>
+              <div class="row">
+                  <div class="col">
+                    거리변수 :  {{value.accuracy - ((value.rssi/value.tx)*0.7095)}}
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+    </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
