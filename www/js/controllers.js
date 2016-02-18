@@ -104,10 +104,12 @@ angular.module('starter.controllers',  ['ionic','ngCordova','ngCordovaBeacon'])
                           uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
                           $scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
 
-                          if(pluginResult.beacons[i].minor=="18079"){
+                          if(pluginResult.beacons[i].minor=="12968"){
                               $scope.beaconsMsg.bcn_no += pluginResult.beacons[i].minor + "(파랑) | ";
                           }else if(pluginResult.beacons[i].minor=="65151"){
                              $scope.beaconsMsg.bcn_no += pluginResult.beacons[i].minor + "(초록) | ";
+                          }else{
+                             $scope.beaconsMsg.bcn_no += pluginResult.beacons[i].minor + "| ";
                           }
                         }
                      $scope.beaconsMsg.bcn_cnt = pluginResult.beacons.length;
